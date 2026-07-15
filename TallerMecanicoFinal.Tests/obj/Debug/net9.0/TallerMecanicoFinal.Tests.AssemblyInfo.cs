@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TallerMecanicoFinal.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+07fd51bb993fd7e64a17b15a732cc3a90395a735")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0e5a665c340dd68fbc03dd6823aa557317548a1")]
 [assembly: System.Reflection.AssemblyProductAttribute("TallerMecanicoFinal.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TallerMecanicoFinal.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
