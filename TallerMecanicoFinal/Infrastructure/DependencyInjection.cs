@@ -27,6 +27,8 @@ public static class DependencyInjection
         services.AddScoped<IMechanicRepository, MechanicRepository>();
         services.AddScoped<IWorkshopRoleRepository, WorkshopRoleRepository>();
         services.AddScoped<AppointmentCreationService>();
+        services.AddScoped<AppointmentManagementService>();
+        services.AddScoped<WorkshopWorkflowService>();
 
         return services;
     }

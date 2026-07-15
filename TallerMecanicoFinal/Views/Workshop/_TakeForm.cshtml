@@ -1,0 +1,31 @@
+@model TallerMecanicoFinal.Models.WorkshopTakeFormViewModel
+
+<form asp-controller="Workshop" asp-action="Take" method="post">
+    @Html.AntiForgeryToken()
+    <input asp-for="AppointmentId" type="hidden" />
+    <input asp-for="MechanicId" type="hidden" />
+    <input asp-for="IsAdmin" type="hidden" />
+
+    <div class="modal-header bg-soft border-0">
+        <div>
+            <h5 class="modal-title mb-1">Tomar auto</h5>
+            <p class="text-muted mb-0 small">Asignación exclusiva: un mecánico solo puede tener un auto en proceso.</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+
+    <div class="modal-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <p class="mb-2"><strong>Placa:</strong> @Model.Plate</p>
+        <p class="mb-0"><strong>Propietario:</strong> @Model.OwnerName</p>
+        @if (!Model.CanTakeAnother)
+        {
+            <div class="alert alert-warning mt-3 mb-0">Este mecánico ya tiene un auto en proceso y no puede tomar otro.</div>
+        }
+    </div>
+
+    <div class="modal-footer border-0 bg-soft">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-accent" @(Model.CanTakeAnother ? null : "disabled")>Confirmar</button>
+    </div>
+</form>

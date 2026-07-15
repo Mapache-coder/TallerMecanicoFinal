@@ -8,6 +8,8 @@ public sealed class AppointmentFormViewModel
 {
     public Guid? Id { get; set; }
 
+    public bool IsReadOnly { get; set; }
+
     [Required]
     [StringLength(20)]
     public string Plate { get; set; } = string.Empty;

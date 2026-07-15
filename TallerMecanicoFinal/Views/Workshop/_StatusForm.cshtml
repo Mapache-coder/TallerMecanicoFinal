@@ -1,0 +1,53 @@
+@model TallerMecanicoFinal.Models.WorkshopStatusFormViewModel
+
+<form asp-controller="Workshop" asp-action="ChangeStatus" method="post">
+    @Html.AntiForgeryToken()
+    <input asp-for="AppointmentId" type="hidden" />
+    <input asp-for="MechanicId" type="hidden" />
+    <input asp-for="IsAdmin" type="hidden" />
+
+    <div class="modal-header bg-soft border-0">
+        <div>
+            <h5 class="modal-title mb-1">Cambiar estado</h5>
+            <p class="text-muted mb-0 small">@Model.Plate - @Model.OwnerName</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+
+    <div class="modal-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        @if (!Model.CanEdit)
+        {
+            <div class="alert alert-warning">El periodo de edición del mecánico ya venció.</div>
+        }
+
+        <div class="row g-3">
+            <div class="col-12 col-md-6">
+                <label asp-for="Status" class="form-label"></label>
+                <select asp-for="Status" class="form-select" disabled="@(Model.CanEdit ? null : "disabled")">
+                    <option value="@TallerMecanicoFinal.Domain.Enums.AppointmentStatus.Completado">Completado</option>
+                    <option value="@TallerMecanicoFinal.Domain.Enums.AppointmentStatus.Entregado">Entregado</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Diagnosis" class="form-label"></label>
+                <textarea asp-for="Diagnosis" rows="3" class="form-control" disabled="@(Model.CanEdit ? null : "disabled")"></textarea>
+                <span asp-validation-for="Diagnosis" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Solution" class="form-label"></label>
+                <textarea asp-for="Solution" rows="3" class="form-control" disabled="@(Model.CanEdit ? null : "disabled")"></textarea>
+                <span asp-validation-for="Solution" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer border-0 bg-soft">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+        @if (Model.CanEdit)
+        {
+            <button type="submit" class="btn btn-accent">Guardar</button>
+        }
+    </div>
+</form>

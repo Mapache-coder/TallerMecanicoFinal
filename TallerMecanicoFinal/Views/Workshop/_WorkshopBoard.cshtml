@@ -1,0 +1,94 @@
+@model TallerMecanicoFinal.Models.WorkshopDashboardViewModel
+
+<div id="workshopBoard">
+    <div class="row g-4 mb-4">
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm stat-card stat-card-soft h-100">
+                <div class="card-body">
+                    <span class="stat-label">Autos registrados hoy</span>
+                    <div class="stat-value">@Model.TodayAppointments.Count</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm stat-card h-100">
+                <div class="card-body">
+                    <span class="stat-label">Puede tomar otro auto</span>
+                    <div class="stat-value">@(Model.CanTakeAnother ? "Sí" : "No")</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm stat-card stat-card-muted h-100">
+                <div class="card-body">
+                    <span class="stat-label">Orden foco</span>
+                    <div class="stat-value">@(Model.FocusAppointment?.Status.ToString() ?? "Sin datos")</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.FocusAppointment is not null)
+    {
+        <div class="card border-0 shadow-sm appointment-card mb-4">
+            <div class="card-body d-flex flex-column flex-md-row justify-content-between gap-3">
+                <div>
+                    <p class="text-uppercase small text-muted mb-1">Orden actual o reciente</p>
+                    <h2 class="h5 mb-1">@Model.FocusAppointment.Plate - @Model.FocusAppointment.OwnerName</h2>
+                    <div class="text-muted">@Model.FocusAppointment.Brand @Model.FocusAppointment.Model</div>
+                    <div class="mt-2 small text-muted">Estado: @Model.FocusAppointment.Status</div>
+                </div>
+                <div class="d-flex flex-wrap gap-2 align-items-start">
+                    @if (Model.FocusAppointment.Status == TallerMecanicoFinal.Domain.Enums.AppointmentStatus.EnProceso && Model.MechanicId.HasValue)
+                    {
+                        <a asp-controller="Workshop" asp-action="ChangeStatus" asp-route-id="@Model.FocusAppointment.Id" asp-route-mechanicId="@Model.MechanicId" asp-route-isAdmin="@Model.IsAdmin" class="btn btn-accent" data-bs-toggle="modal" data-bs-target="#workshopModal">
+                            Cambiar estado
+                        </a>
+                    }
+                    @if (Model.MechanicId.HasValue && (Model.IsAdmin || Model.FocusAppointment.CanBeEditedByMechanic(DateTime.Now)))
+                    {
+                        <a asp-controller="Workshop" asp-action="Edit" asp-route-id="@Model.FocusAppointment.Id" asp-route-mechanicId="@Model.MechanicId" asp-route-isAdmin="@Model.IsAdmin" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#workshopModal">
+                            Correcciones
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row g-4">
+        @foreach (var appointment in Model.TodayAppointments)
+        {
+            <div class="col-12 col-lg-6 col-xxl-4">
+                <div class="card appointment-card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                            <div>
+                                <div class="text-uppercase small text-muted">@appointment.Plate</div>
+                                <h2 class="h5 mb-1">@appointment.OwnerName</h2>
+                                <div class="text-muted">@appointment.Brand @appointment.Model</div>
+                            </div>
+                            <span class="badge rounded-pill text-bg-light appointment-status">@appointment.Status</span>
+                        </div>
+                        <dl class="row small mb-3">
+                            <dt class="col-5 text-muted">Hora</dt>
+                            <dd class="col-7">@appointment.ScheduledAt.ToString("HH:mm")</dd>
+                            <dt class="col-5 text-muted">Teléfono</dt>
+                            <dd class="col-7">@appointment.OwnerPhone</dd>
+                            <dt class="col-5 text-muted">Mecánico</dt>
+                            <dd class="col-7">@(appointment.AssignedMechanic?.FullName ?? "Sin asignar")</dd>
+                        </dl>
+                        <div class="mt-auto d-flex flex-wrap gap-2">
+                            @if (Model.MechanicId.HasValue && Model.CanTakeAnother)
+                            {
+                                <a asp-controller="Workshop" asp-action="Take" asp-route-id="@appointment.Id" asp-route-mechanicId="@Model.MechanicId" asp-route-isAdmin="@Model.IsAdmin" class="btn btn-accent" data-bs-toggle="modal" data-bs-target="#workshopModal">
+                                    Tomar auto
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

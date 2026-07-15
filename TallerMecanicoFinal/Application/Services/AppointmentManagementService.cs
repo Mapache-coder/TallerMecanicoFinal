@@ -44,7 +44,15 @@ public sealed class AppointmentManagementService
             request.OwnerPhone,
             request.ScheduledAt);
 
-        return await PersistAsync(appointment, cancellationToken);
+        if (await _unitOfWork.Appointments.ExistsAtAsync(appointment.ScheduledAt, null, cancellationToken))
+        {
+            throw new InvalidOperationException("There is already an appointment scheduled for the selected date and hour.");
+        }
+
+        await _unitOfWork.Appointments.AddAsync(appointment, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return appointment;
     }
 
     public async Task<ServiceAppointment> UpdateAsync(AppointmentUpdateRequest request, CancellationToken cancellationToken = default)
@@ -61,7 +69,7 @@ public sealed class AppointmentManagementService
             throw new InvalidOperationException("There is already an appointment scheduled for the selected date and hour.");
         }
 
-        appointment.ApplyMechanicCorrections(
+        appointment.UpdateDetails(
             request.Plate,
             request.Brand,
             request.Model,
@@ -69,11 +77,12 @@ public sealed class AppointmentManagementService
             request.OwnerName,
             request.Mileage,
             request.OwnerPhone,
-            null,
-            null,
-            DateTime.Now);
+            request.ScheduledAt);
 
-        return await PersistAsync(appointment, cancellationToken);
+        _unitOfWork.Appointments.Update(appointment);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return appointment;
     }
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
@@ -85,24 +94,4 @@ public sealed class AppointmentManagementService
         await _unitOfWork.SaveChangesAsync(cancellationToken);
     }
 
-    private async Task<ServiceAppointment> PersistAsync(ServiceAppointment appointment, CancellationToken cancellationToken)
-    {
-        var existsAtSameSlot = await _unitOfWork.Appointments.ExistsAtAsync(appointment.ScheduledAt, appointment.Id == Guid.Empty ? null : appointment.Id, cancellationToken);
-        if (existsAtSameSlot)
-        {
-            throw new InvalidOperationException("There is already an appointment scheduled for the selected date and hour.");
-        }
-
-        if (appointment.Id == Guid.Empty)
-        {
-            await _unitOfWork.Appointments.AddAsync(appointment, cancellationToken);
-        }
-        else
-        {
-            _unitOfWork.Appointments.Update(appointment);
-        }
-
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return appointment;
-    }
 }

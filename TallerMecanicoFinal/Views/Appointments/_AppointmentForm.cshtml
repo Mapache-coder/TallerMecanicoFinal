@@ -6,6 +6,7 @@
     {
         <input asp-for="Id" type="hidden" />
     }
+    <input asp-for="IsReadOnly" type="hidden" />
 
     <div class="modal-header bg-soft border-0">
         <div>
@@ -21,42 +22,42 @@
         <div class="row g-3">
             <div class="col-12 col-md-4">
                 <label asp-for="Plate" class="form-label"></label>
-                <input asp-for="Plate" class="form-control" />
+                <input asp-for="Plate" class="form-control" disabled="@(Model.IsReadOnly ? "disabled" : null)" />
                 <span asp-validation-for="Plate" class="text-danger"></span>
             </div>
             <div class="col-12 col-md-4">
                 <label asp-for="Brand" class="form-label"></label>
-                <input asp-for="Brand" class="form-control" />
+                <input asp-for="Brand" class="form-control" disabled="@(Model.IsReadOnly ? "disabled" : null)" />
                 <span asp-validation-for="Brand" class="text-danger"></span>
             </div>
             <div class="col-12 col-md-4">
                 <label asp-for="Model" class="form-label"></label>
-                <input asp-for="Model" class="form-control" />
+                <input asp-for="Model" class="form-control" disabled="@(Model.IsReadOnly ? "disabled" : null)" />
                 <span asp-validation-for="Model" class="text-danger"></span>
             </div>
             <div class="col-12 col-md-4">
                 <label asp-for="OwnerDocument" class="form-label"></label>
-                <input asp-for="OwnerDocument" class="form-control" />
+                <input asp-for="OwnerDocument" class="form-control" disabled="@(Model.IsReadOnly ? "disabled" : null)" />
                 <span asp-validation-for="OwnerDocument" class="text-danger"></span>
             </div>
             <div class="col-12 col-md-4">
                 <label asp-for="OwnerName" class="form-label"></label>
-                <input asp-for="OwnerName" class="form-control" />
+                <input asp-for="OwnerName" class="form-control" disabled="@(Model.IsReadOnly ? "disabled" : null)" />
                 <span asp-validation-for="OwnerName" class="text-danger"></span>
             </div>
             <div class="col-12 col-md-4">
                 <label asp-for="OwnerPhone" class="form-label"></label>
-                <input asp-for="OwnerPhone" class="form-control" />
+                <input asp-for="OwnerPhone" class="form-control" disabled="@(Model.IsReadOnly ? "disabled" : null)" />
                 <span asp-validation-for="OwnerPhone" class="text-danger"></span>
             </div>
             <div class="col-12 col-md-6">
                 <label asp-for="Mileage" class="form-label"></label>
-                <input asp-for="Mileage" class="form-control" />
+                <input asp-for="Mileage" class="form-control" disabled="@(Model.IsReadOnly ? "disabled" : null)" />
                 <span asp-validation-for="Mileage" class="text-danger"></span>
             </div>
             <div class="col-12 col-md-6">
                 <label asp-for="ScheduledAt" class="form-label"></label>
-                <input asp-for="ScheduledAt" type="datetime-local" class="form-control" />
+                <input asp-for="ScheduledAt" type="datetime-local" class="form-control" disabled="@(Model.IsReadOnly ? "disabled" : null)" />
                 <span asp-validation-for="ScheduledAt" class="text-danger"></span>
             </div>
         </div>
@@ -64,6 +65,9 @@
 
     <div class="modal-footer border-0 bg-soft">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-accent">Guardar</button>
+        @if (!Model.IsReadOnly)
+        {
+            <button type="submit" class="btn btn-accent">Guardar</button>
+        }
     </div>
 </form>

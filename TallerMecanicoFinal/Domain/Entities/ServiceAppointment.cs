@@ -200,6 +200,38 @@ public sealed class ServiceAppointment
         }
     }
 
+    public void UpdateDetails(
+        string plate,
+        string brand,
+        string model,
+        string ownerDocument,
+        string ownerName,
+        decimal mileage,
+        string ownerPhone,
+        DateTime scheduledAt)
+    {
+        ValidateRequiredText(plate, nameof(plate));
+        ValidateRequiredText(brand, nameof(brand));
+        ValidateRequiredText(model, nameof(model));
+        ValidateRequiredText(ownerDocument, nameof(ownerDocument));
+        ValidateRequiredText(ownerName, nameof(ownerName));
+        ValidateRequiredText(ownerPhone, nameof(ownerPhone));
+
+        if (mileage < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(mileage), "Mileage must be zero or greater.");
+        }
+
+        Plate = plate.Trim().ToUpperInvariant();
+        Brand = brand.Trim();
+        Model = model.Trim();
+        OwnerDocument = ownerDocument.Trim();
+        OwnerName = ownerName.Trim();
+        Mileage = mileage;
+        OwnerPhone = ownerPhone.Trim();
+        ScheduledAt = NormalizeScheduledAt(scheduledAt);
+    }
+
     public static DateTime NormalizeScheduledAt(DateTime scheduledAt)
     {
         return new DateTime(
