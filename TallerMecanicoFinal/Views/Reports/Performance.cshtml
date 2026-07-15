@@ -1,0 +1,29 @@
+@model TallerMecanicoFinal.Models.MonthlyPerformanceViewModel
+@{
+    ViewData["Title"] = "Desempeño mensual";
+}
+
+<div class="appointment-page">
+    <div class="card border-0 shadow-sm appointment-hero mb-4">
+        <div class="card-body p-4 p-md-5">
+            <p class="text-uppercase text-accent fw-semibold mb-1">Administrador</p>
+            <h1 class="h3 mb-2">Desempeño mensual</h1>
+            <p class="text-muted mb-0">Total de órdenes completadas por mecánico durante el mes actual.</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var row in Model.Rows)
+        {
+            <div class="col-12 col-md-6 col-xxl-4">
+                <div class="card border-0 shadow-sm appointment-card h-100">
+                    <div class="card-body">
+                        <p class="text-uppercase small text-muted mb-1">@row.MechanicName</p>
+                        <h2 class="h5 mb-2">Órdenes completadas</h2>
+                        <div class="stat-value">@row.CompletedCount</div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

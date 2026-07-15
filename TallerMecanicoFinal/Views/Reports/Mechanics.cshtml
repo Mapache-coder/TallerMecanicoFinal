@@ -1,0 +1,31 @@
+@model TallerMecanicoFinal.Models.MechanicDirectoryViewModel
+@{
+    ViewData["Title"] = "Perfiles de mecánicos";
+}
+
+<div class="appointment-page">
+    <div class="card border-0 shadow-sm appointment-hero mb-4">
+        <div class="card-body p-4 p-md-5">
+            <p class="text-uppercase text-accent fw-semibold mb-1">Mecánicos</p>
+            <h1 class="h3 mb-2">Perfil del mecánico</h1>
+            <p class="text-muted mb-0">Selecciona un mecánico para revisar sus datos y su contador semanal de órdenes completadas.</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var mechanic in Model.Mechanics)
+        {
+            <div class="col-12 col-md-6 col-xxl-4">
+                <div class="card border-0 shadow-sm appointment-card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <p class="text-uppercase small text-muted mb-1">@mechanic.DocumentNumber</p>
+                        <h2 class="h5 mb-2">@mechanic.FullName</h2>
+                        <div class="mt-auto d-flex gap-2">
+                            <a asp-controller="Reports" asp-action="MechanicProfile" asp-route-id="@mechanic.Id" class="btn btn-accent">Ver perfil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

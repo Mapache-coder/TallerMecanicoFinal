@@ -1,0 +1,37 @@
+@model TallerMecanicoFinal.Models.MechanicProfileViewModel
+@{
+    ViewData["Title"] = "Perfil del mecánico";
+}
+
+<div class="appointment-page">
+    <div class="card border-0 shadow-sm appointment-hero mb-4">
+        <div class="card-body p-4 p-md-5">
+            <p class="text-uppercase text-accent fw-semibold mb-1">Mecánico</p>
+            <h1 class="h3 mb-2">@Model.FullName</h1>
+            <p class="text-muted mb-0">Documento: @Model.DocumentNumber</p>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-12 col-md-6">
+            <div class="card border-0 shadow-sm stat-card stat-card-soft h-100">
+                <div class="card-body">
+                    <span class="stat-label">Órdenes completadas esta semana</span>
+                    <div class="stat-value">@Model.WeeklyCompletedCount</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card border-0 shadow-sm stat-card stat-card-muted h-100">
+                <div class="card-body">
+                    <span class="stat-label">Rango semanal</span>
+                    <div class="stat-value small">@Model.WeekStart.ToString("dd/MM") - @Model.WeekEnd.AddDays(-1).ToString("dd/MM")</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex gap-2">
+        <a asp-controller="Reports" asp-action="Mechanics" class="btn btn-outline-primary">Volver a mecánicos</a>
+    </div>
+</div>

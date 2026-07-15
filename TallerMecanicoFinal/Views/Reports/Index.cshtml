@@ -1,0 +1,46 @@
+@{
+    ViewData["Title"] = "Reportes";
+}
+
+<div class="appointment-page">
+    <div class="card border-0 shadow-sm appointment-hero mb-4">
+        <div class="card-body p-4 p-md-5">
+            <p class="text-uppercase text-accent fw-semibold mb-1">Lectura operativa</p>
+            <h1 class="h3 mb-2">Historial, perfil y desempeño</h1>
+            <p class="text-muted mb-0">Consultas rápidas y claras, basadas en tarjetas responsivas y sin rutas estáticas.</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm appointment-card h-100">
+                <div class="card-body d-flex flex-column">
+                    <p class="text-uppercase small text-muted mb-1">Administrador</p>
+                    <h2 class="h5">Historial por placa</h2>
+                    <p class="text-muted">Filtra solo órdenes Completadas y citas futuras Programadas.</p>
+                    <a asp-controller="Reports" asp-action="History" class="btn btn-accent mt-auto">Abrir historial</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm appointment-card h-100">
+                <div class="card-body d-flex flex-column">
+                    <p class="text-uppercase small text-muted mb-1">Mecánicos</p>
+                    <h2 class="h5">Perfil del mecánico</h2>
+                    <p class="text-muted">Consulta los datos básicos y su contador semanal de órdenes completadas.</p>
+                    <a asp-controller="Reports" asp-action="Mechanics" class="btn btn-outline-primary mt-auto">Ver perfiles</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm appointment-card h-100">
+                <div class="card-body d-flex flex-column">
+                    <p class="text-uppercase small text-muted mb-1">Administrador</p>
+                    <h2 class="h5">Desempeño mensual</h2>
+                    <p class="text-muted">Totales de órdenes completadas por mecánico durante el mes actual.</p>
+                    <a asp-controller="Reports" asp-action="Performance" class="btn btn-outline-primary mt-auto">Ver reporte</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
