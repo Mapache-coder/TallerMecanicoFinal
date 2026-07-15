@@ -1,5 +1,17 @@
+:root {
+  --workshop-bg: #f6f1fb;
+  --workshop-surface: #ffffff;
+  --workshop-soft: #ede4f7;
+  --workshop-accent: #7f56d9;
+  --workshop-accent-dark: #5f3bb4;
+  --workshop-text: #2f2a3d;
+  --workshop-muted: #6d647c;
+}
+
 html {
   font-size: 14px;
+  position: relative;
+  min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -8,24 +20,109 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
   margin-bottom: 60px;
+  background:
+    radial-gradient(circle at top left, rgba(127, 86, 217, 0.11), transparent 30%),
+    linear-gradient(180deg, #fbf9fe 0%, var(--workshop-bg) 100%);
+  color: var(--workshop-text);
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+.navbar {
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(10px);
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.navbar-brand,
+.nav-link {
+  color: var(--workshop-text) !important;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem #fff, 0 0 0 0.25rem rgba(127, 86, 217, 0.25);
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--workshop-accent), var(--workshop-accent-dark));
+  border: none;
+  color: #fff;
+}
+
+.btn-accent:hover {
+  color: #fff;
+  filter: brightness(1.03);
+}
+
+.text-accent {
+  color: var(--workshop-accent) !important;
+}
+
+.appointment-page {
+  padding-bottom: 2rem;
+}
+
+.appointment-hero,
+.appointment-card,
+.stat-card {
+  border-radius: 1.25rem;
+}
+
+.appointment-hero {
+  background: linear-gradient(135deg, rgba(127, 86, 217, 0.14), rgba(255, 255, 255, 0.88));
+}
+
+.bg-soft {
+  background: var(--workshop-soft);
+}
+
+.stat-card {
+  background: var(--workshop-surface);
+}
+
+.stat-card-soft {
+  background: linear-gradient(135deg, rgba(127, 86, 217, 0.12), var(--workshop-surface));
+}
+
+.stat-card-muted {
+  background: linear-gradient(135deg, rgba(109, 100, 124, 0.08), var(--workshop-surface));
+}
+
+.stat-label {
+  display: block;
+  color: var(--workshop-muted);
+  font-size: 0.875rem;
+  margin-bottom: 0.35rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.appointment-card {
+  background: rgba(255, 255, 255, 0.92);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.appointment-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1rem 2rem rgba(79, 42, 141, 0.12) !important;
+}
+
+.appointment-status {
+  color: var(--workshop-accent-dark);
+  background: var(--workshop-soft) !important;
+}
+
+.modal-content {
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+footer {
+  background: transparent;
 }

@@ -205,7 +205,6 @@ C:\Users\USER\source\repos\TallerMecanicoFinal\TallerMecanicoFinal\obj\Debug\net
 C:\Users\USER\source\repos\TallerMecanicoFinal\TallerMecanicoFinal\obj\Debug\net9.0\compressed\2wbjjpyy6x-bqjiyaj88i.gz
 C:\Users\USER\source\repos\TallerMecanicoFinal\TallerMecanicoFinal\obj\Debug\net9.0\compressed\odddajrovp-xtxxf3hu2r.gz
 C:\Users\USER\source\repos\TallerMecanicoFinal\TallerMecanicoFinal\obj\Debug\net9.0\compressed\cyfmyyc98g-61n19gt1b8.gz
-C:\Users\USER\source\repos\TallerMecanicoFinal\TallerMecanicoFinal\obj\Debug\net9.0\compressed\b2xgn596ar-b9sayid5wm.gz
 C:\Users\USER\source\repos\TallerMecanicoFinal\TallerMecanicoFinal\obj\Debug\net9.0\compressed\m3c5gxnziv-j6groc3t45.gz
 C:\Users\USER\source\repos\TallerMecanicoFinal\TallerMecanicoFinal\obj\Debug\net9.0\compressed\ua8wa8lpu6-j6groc3t45.gz
 C:\Users\USER\source\repos\TallerMecanicoFinal\TallerMecanicoFinal\obj\Debug\net9.0\staticwebassets.build.json
@@ -218,3 +217,5 @@ C:\Users\USER\source\repos\TallerMecanicoFinal\TallerMecanicoFinal\obj\Debug\net
 C:\Users\USER\source\repos\TallerMecanicoFinal\TallerMecanicoFinal\obj\Debug\net9.0\TallerMecanicoFinal.pdb
 C:\Users\USER\source\repos\TallerMecanicoFinal\TallerMecanicoFinal\obj\Debug\net9.0\TallerMecanicoFinal.genruntimeconfig.cache
 C:\Users\USER\source\repos\TallerMecanicoFinal\TallerMecanicoFinal\obj\Debug\net9.0\ref\TallerMecanicoFinal.dll
+C:\Users\USER\source\repos\TallerMecanicoFinal\TallerMecanicoFinal\obj\Debug\net9.0\compressed\b2xgn596ar-v6cg3jcoyb.gz
+C:\Users\USER\source\repos\TallerMecanicoFinal\TallerMecanicoFinal\obj\Debug\net9.0\compressed\fbkr46ua3w-bfy3meg1zp.gz

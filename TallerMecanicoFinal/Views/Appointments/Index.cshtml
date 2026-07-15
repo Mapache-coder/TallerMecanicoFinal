@@ -1,0 +1,95 @@
+@model IEnumerable<TallerMecanicoFinal.Domain.Entities.ServiceAppointment>
+@{
+    ViewData["Title"] = "Citas";
+}
+
+<div class="appointment-page">
+    <div class="appointment-hero card border-0 shadow-sm mb-4">
+        <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+            <div>
+                <p class="text-uppercase text-accent fw-semibold mb-1">Gestión de citas</p>
+                <h1 class="h3 mb-2">Agenda operativa del taller</h1>
+                <p class="text-muted mb-0">Administra citas con validación estricta y una experiencia fluida basada en modales AJAX.</p>
+            </div>
+            <button type="button" class="btn btn-accent btn-lg" data-bs-toggle="modal" data-bs-target="#appointmentModal" data-url="@Url.Action("Create", "Appointments")">
+                Nueva cita
+            </button>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm stat-card stat-card-soft h-100">
+                <div class="card-body">
+                    <span class="stat-label">Total citas</span>
+                    <div class="stat-value">@Model.Count()</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm stat-card h-100">
+                <div class="card-body">
+                    <span class="stat-label">Próxima agenda</span>
+                    <div class="stat-value">@Model.Count(x => x.Status == TallerMecanicoFinal.Domain.Enums.AppointmentStatus.Registrado)</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm stat-card stat-card-muted h-100">
+                <div class="card-body">
+                    <span class="stat-label">En proceso</span>
+                    <div class="stat-value">@Model.Count(x => x.Status == TallerMecanicoFinal.Domain.Enums.AppointmentStatus.EnProceso)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var appointment in Model)
+        {
+            <div class="col-12 col-lg-6 col-xxl-4">
+                <div class="card appointment-card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                            <div>
+                                <div class="text-uppercase small text-muted">@appointment.Plate</div>
+                                <h2 class="h5 mb-1">@appointment.OwnerName</h2>
+                                <div class="text-muted">@appointment.Brand @appointment.Model</div>
+                            </div>
+                            <span class="badge rounded-pill text-bg-light appointment-status">@appointment.Status</span>
+                        </div>
+                        <dl class="row small mb-3">
+                            <dt class="col-5 text-muted">Fecha</dt>
+                            <dd class="col-7">@appointment.ScheduledAt.ToString("dd/MM/yyyy HH:mm")</dd>
+                            <dt class="col-5 text-muted">DNI</dt>
+                            <dd class="col-7">@appointment.OwnerDocument</dd>
+                            <dt class="col-5 text-muted">Teléfono</dt>
+                            <dd class="col-7">@appointment.OwnerPhone</dd>
+                            <dt class="col-5 text-muted">Kilometraje</dt>
+                            <dd class="col-7">@appointment.Mileage.ToString("N0")</dd>
+                        </dl>
+                        <div class="mt-auto d-flex flex-wrap gap-2">
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#appointmentModal" data-url="@Url.Action("Edit", "Appointments", new { id = appointment.Id })">
+                                Editar
+                            </button>
+                            <form asp-controller="Appointments" asp-action="Delete" asp-route-id="@appointment.Id" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="modal fade" id="appointmentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content" id="appointmentModalContent"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/appointments.js" asp-append-version="true"></script>
+}

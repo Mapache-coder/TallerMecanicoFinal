@@ -1,8 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="appointment-page">
+    <div class="card border-0 shadow-sm appointment-hero">
+        <div class="card-body p-5">
+            <p class="text-uppercase text-accent fw-semibold mb-2">Taller mecánico automotriz</p>
+            <h1 class="display-5 fw-bold mb-3">Gestión operativa moderna para citas y órdenes de trabajo</h1>
+            <p class="lead text-muted mb-4">Un flujo visual limpio, responsivo y centrado en la operación diaria del taller.</p>
+            <a asp-controller="Appointments" asp-action="Index" class="btn btn-accent btn-lg">Ir a citas</a>
+        </div>
+    </div>
 </div>
